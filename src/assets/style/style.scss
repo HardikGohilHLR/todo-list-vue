@@ -1,0 +1,207 @@
+body,*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Sen', sans-serif;
+}
+// Todo list
+.todo-list-container{
+    margin-top: 60px;
+}
+.container{
+    max-width: 540px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+// Mixins
+@mixin d-flex{
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+    align-items: center;
+}
+@mixin d-justify-between{
+    justify-content: space-between;
+}
+.header-img{
+    text-align: center;
+    max-width: 100px;
+    margin: 0 auto 20px;
+    width: 100%;
+    img{
+        width: 100%;
+    }
+}
+// Todo input
+.todo-input .form-group{
+    margin-bottom: 10px;
+    input{
+        width: 100%;
+        padding: 15px 25px;
+        font-size: 20px;
+        color: #555;
+        outline: none;
+        border:1px solid #222;
+        border-radius: 2px;
+    }
+}
+
+// Todo List
+.todo-item{
+    @include d-flex;
+    border-bottom: 1px solid #ededed;
+    padding: 15px 10px 15px 0;
+
+    &.completed{
+        h3{
+            text-decoration: line-through;
+        }
+    }
+    .drag-todo{
+        display: flex;
+        flex-direction: column;
+        margin-right: 10px;
+        cursor: pointer;
+        span{
+            background: #dedede;
+            display: inline-block;
+            width: 20px;
+            height: 2px;
+            margin-bottom: 4px;
+            &:last-child{
+                margin-bottom: 0;
+            }
+        }
+    }
+    .todo-desc{
+        @include d-flex;
+        @include d-justify-between;
+        width: 100%;
+        h3{
+            font-weight: 400;
+            font-size: 24px;
+            padding-left: 5px;
+            line-height: 50px;
+            width: 100%;
+        }
+        button{
+            background: none;
+            border:none;
+            outline: none;
+            font-size: 30px;
+            font-weight: 400;
+            cursor: pointer;
+        }
+
+        .edit-todo{
+            width: 90%;
+            display: none;
+            input{
+                padding: 8px 15px 8px 5px;
+                width: 100%;
+                display: block;
+                font-weight: 400;
+                font-size: 24px;
+                outline: none;
+            }
+        }
+
+        &.editing{
+            h3{
+                display: none;
+            }
+            .edit-todo{
+                display: block;
+            }
+        }
+    }
+}
+
+.todo-actions{
+    padding: 20px 10px;
+    border-bottom: 1px solid #ededed;
+    .check-all-todos{
+        @include d-flex;
+        @include d-justify-between;
+    }
+    .todo-left{
+        p{
+            font-size: 15px;
+            line-height: 20px;
+        }
+    }
+    .checkbox-group{
+        @include d-flex;
+        cursor: pointer;
+    }
+}
+
+// Radio button
+.checkbox-group{
+    position: relative;
+    input{
+        opacity: 0;
+        position: absolute;
+        left: 0;
+        z-index: 0;
+        &:checked{
+            + label{
+                &:after{
+                    content: '';
+                    position: absolute;
+                    width: 8px;
+                    height: 9px;
+                    border-radius: 2px;
+                    left: 6px;
+                    cursor: pointer;
+                    -webkit-box-sizing: border-box;
+                    box-sizing: border-box;
+                    top: 5px;
+                    background: #222;
+                }
+            }
+        }
+    }
+
+    label{
+        position: relative;
+        z-index: 1;
+        padding-left: 30px;
+        cursor: pointer;
+        font-size: 15px;
+        line-height: 20px;
+        &:before{
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #222;
+            border-radius: 2px;
+            left: 0;
+            cursor: pointer;
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+        }
+    }
+}
+
+.todo-filters{
+    padding: 20px 10px;
+    button{
+        background: #e5e5e5;
+        outline: none;
+        border: none;
+        font-size: 14px;
+        padding: 5px 10px;
+        margin-right: 10px;
+        border-radius: 3px;
+        text-transform: capitalize;
+        cursor: pointer;
+
+        &.active{
+            background: #333;
+            color: #fff;
+        }
+    }
+}
